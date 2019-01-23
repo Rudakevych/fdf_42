@@ -31,7 +31,7 @@ void	draw_line_down(t_d_s_points ds_points, t_vector strt, t_window window)
 	d = (ds_points.dy << 1) - ds_points.dx;
 	d1 = ds_points.dy << 1;
 	d2 = (ds_points.dy - ds_points.dx) << 1;
-	mlx_pixel_put(window.mlx_ptr, window.win_ptr, strt.x, strt.y, strt.color);
+	mlx_pixel_put(window.mlx_ptr, window.win_ptr, strt.x + 200, strt.y + 200, strt.color);
 	while (ds_points.i <= ds_points.dx)
 	{
 		if (d > 0)
@@ -41,7 +41,7 @@ void	draw_line_down(t_d_s_points ds_points, t_vector strt, t_window window)
 		}
 		else
 			d += d1;
-		mlx_pixel_put(window.mlx_ptr, window.win_ptr, x, y, strt.color);
+		mlx_pixel_put(window.mlx_ptr, window.win_ptr, x + 200, y + 200, strt.color);
 		ds_points.i++;
 		x += ds_points.sx;
 	}
@@ -60,7 +60,7 @@ void	draw_line_up(t_d_s_points ds_points, t_vector strt, t_window window)
 	d = (ds_points.dx << 1) - ds_points.dy;
 	d1 = ds_points.dx << 1;
 	d2 = (ds_points.dx - ds_points.dy) << 1;
-	mlx_pixel_put(window.mlx_ptr, window.win_ptr, strt.x, strt.y, strt.color);
+	mlx_pixel_put(window.mlx_ptr, window.win_ptr, strt.x + 200, strt.y + 200, strt.color);
 	while (ds_points.i <= ds_points.dy)
 	{
 		if (d > 0)
@@ -70,7 +70,7 @@ void	draw_line_up(t_d_s_points ds_points, t_vector strt, t_window window)
 		}
 		else
 			d += d1;
-		mlx_pixel_put(window.mlx_ptr, window.win_ptr, x, y, strt.color);
+		mlx_pixel_put(window.mlx_ptr, window.win_ptr, x + 200, y + 200, strt.color);
 		ds_points.i++;
 		y += ds_points.sy;
 	}

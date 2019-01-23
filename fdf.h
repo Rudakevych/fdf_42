@@ -70,7 +70,7 @@ typedef struct		s_dx_dy_sx_sy
 	int				i;
 }					t_d_s_points;
 
-int					ft_read_map(int fd, t_coordinates **arr_of_coordinates, int lines_nbr, int columns_nbr);
+int					ft_read_map(int fd, t_coordinates **arr_of_coordinates);
 int					get_next_line(const int fd, char **line);
 int					ft_check_lines_number(int fd);
 int					ft_ft_check_columns_number(int fd);

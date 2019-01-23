@@ -73,15 +73,15 @@ int		main(/*int argc, char **argv*/)
 
 //	if (argc != 2) // ??????
 //		ft_putstr("Usage : ./fdf <filename> [ case_size z_size ]");
-	arr_of_coordinates = NULL;
 //	window = NULL;
 	fd = fd_open_file_with_map();
 	map.lines_nbr = ft_check_lines_number(fd);
 	map.columns_nbr = ft_ft_check_columns_number(fd);
 	close(fd);
 
+	arr_of_coordinates = ft_create_map(map.lines_nbr, map.columns_nbr);
 	fd = fd_open_file_with_map();
-	if (!(ft_read_map(fd, arr_of_coordinates, map.lines_nbr, map.columns_nbr)))
+	if (!(ft_read_map(fd, arr_of_coordinates)))
 	{
 		ft_putstr("error\n");
 		return (0);
@@ -89,6 +89,8 @@ int		main(/*int argc, char **argv*/)
 	// init new window
 	window.mlx_ptr = mlx_init();
 	window.win_ptr = mlx_new_window(window.mlx_ptr, LENGTH, WIDTH, "fdf");
+	draw_net(map, window, arr_of_coordinates);
+	mlx_loop(window.mlx_ptr);
 
 	/** test */
 //	t_vector start;
@@ -102,9 +104,9 @@ int		main(/*int argc, char **argv*/)
 //	draw_line(start, end, window);
 
 
-	draw_net(map, window, arr_of_coordinates);
 
-	mlx_loop(window.mlx_ptr);
+
+//	mlx_loop(window.mlx_ptr);
 	close(fd);
 	// add code for free arr_of_coordinates
 //	system("leaks -q main");

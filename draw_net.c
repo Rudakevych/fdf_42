@@ -20,8 +20,8 @@ void	draw_net(t_map map, t_window window, t_coordinates	**arr_of_coordinates)
 {
 	int 		i;
 	int 		j;
-	t_vector	start;
-	t_vector	end;
+	t_vector	start_h;
+	t_vector	end_h;
 
 	i = 0;
 	while (i < (map.lines_nbr - 1))
@@ -29,15 +29,29 @@ void	draw_net(t_map map, t_window window, t_coordinates	**arr_of_coordinates)
 		j = 0;
 		while (j < (map.columns_nbr - 1))
 		{
-			start.x = arr_of_coordinates[i][j].x;
-			start.y = arr_of_coordinates[i][j].y;
+			if (j != (map.columns_nbr - 1))
+			{
+				start_h.x = arr_of_coordinates[i][j].x * 10;
+				start_h.y = arr_of_coordinates[i][j].y * 10;
+				start_h.color = 0xFFFFFF; // add correct usage
 
-			end.x = arr_of_coordinates[i + 1][j].x;
-			end.y = arr_of_coordinates[i][j].y;
+				end_h.x = arr_of_coordinates[i][j].x * 10;
+				end_h.y = (arr_of_coordinates[i][j].y + 1) * 10;
+				end_h.color = 0xFFFFFF; // add correct usage
+				draw_line(start_h, end_h, window);
+			}
+			if (j != (map.lines_nbr - 1))
+			{
+				start_h.x = arr_of_coordinates[i][j].x * 10;
+				start_h.y = arr_of_coordinates[i][j].y * 10;
+				start_h.color = 0xFFFFFF; // add correct usage
 
-			draw_line(start, end, window); // vertical line
-			draw_line(start, end, window); // horizontal line
-
+				end_h.x = (arr_of_coordinates[i][j].x + 1) * 10;
+				end_h.y = arr_of_coordinates[i][j].y * 10;
+				end_h.color = 0xFFFFFF; // add correct usage
+				draw_line(start_h, end_h, window);
+			}
+//			printf("%d: %d -> %d: %d\n", start_h.x, start_h.y, end_h.x, end_h.y);
 			j++;
 		}
 		i++;
