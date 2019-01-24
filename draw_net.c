@@ -16,7 +16,8 @@
 ** draw 2D net by x/y coordinates
 */
 
-void	draw_net(t_map map, t_window window, t_coordinates	**arr_of_coordinates)
+void	draw_net(t_map map, t_window window,
+		t_coordinates	**arr_of_coordinates)
 {
 	int 		i;
 	int 		j;
@@ -24,36 +25,57 @@ void	draw_net(t_map map, t_window window, t_coordinates	**arr_of_coordinates)
 	t_vector	end_h;
 
 	i = 0;
-	while (i < (map.lines_nbr - 1))
+	j = 0;
+	while (i < map.lines_nbr)
 	{
 		j = 0;
-		while (j < (map.columns_nbr - 1))
+		while (j < map.columns_nbr)
 		{
-			if (j != (map.columns_nbr - 1))
-			{
-				start_h.x = arr_of_coordinates[i][j].x * 10;
-				start_h.y = arr_of_coordinates[i][j].y * 10;
+//			if (j != map.columns_nbr - 1)
+//			{
+				start_h.x = arr_of_coordinates[i][j].x * 20;
+				start_h.y = arr_of_coordinates[i][j].y * 20;
 				start_h.color = 0xFFFFFF; // add correct usage
 
-				end_h.x = arr_of_coordinates[i][j].x * 10;
-				end_h.y = (arr_of_coordinates[i][j].y + 1) * 10;
+				end_h.x = arr_of_coordinates[i][j].x * 20;
+				end_h.y = (arr_of_coordinates[i][j].y + 1) * 20;
 				end_h.color = 0xFFFFFF; // add correct usage
 				draw_line(start_h, end_h, window);
-			}
-			if (j != (map.lines_nbr - 1))
-			{
-				start_h.x = arr_of_coordinates[i][j].x * 10;
-				start_h.y = arr_of_coordinates[i][j].y * 10;
+//			}
+//			if (j != map.lines_nbr - 1)
+//			{
+				start_h.x = arr_of_coordinates[i][j].x * 20;
+				start_h.y = arr_of_coordinates[i][j].y * 20;
 				start_h.color = 0xFFFFFF; // add correct usage
 
-				end_h.x = (arr_of_coordinates[i][j].x + 1) * 10;
-				end_h.y = arr_of_coordinates[i][j].y * 10;
+				end_h.x = (arr_of_coordinates[i][j].x + 1) * 20;
+				end_h.y = arr_of_coordinates[i][j].y * 20;
 				end_h.color = 0xFFFFFF; // add correct usage
 				draw_line(start_h, end_h, window);
-			}
+//			}
+//			printf("%d      X: %d    Y:%d \n", num++, arr_of_coordinates[i][j].x, arr_of_coordinates[i][j].y);
 //			printf("%d: %d -> %d: %d\n", start_h.x, start_h.y, end_h.x, end_h.y);
 			j++;
 		}
 		i++;
 	}
+
+	/** КОСТИЛЬ */
+	start_h.x = (arr_of_coordinates[i][j].x + map.columns_nbr) * 20;
+	start_h.y = (arr_of_coordinates[i][j].y) * 20;
+	start_h.color = 0xff0000; // add correct usage
+
+	end_h.x = (arr_of_coordinates[i][j].x + map.columns_nbr) * 20;
+	end_h.y = (arr_of_coordinates[i][j].y + map.columns_nbr) * 20;
+	end_h.color = 0xff0000; // add correct usage
+	draw_line(start_h, end_h, window);
+
+	start_h.x = (arr_of_coordinates[i][j].x) * 20;
+	start_h.y = (arr_of_coordinates[i][j].y + map.lines_nbr) * 20;
+	start_h.color = 0xff0000; // add correct usage
+
+	end_h.x = (arr_of_coordinates[i][j].x + map.columns_nbr) * 20;
+	end_h.y = (arr_of_coordinates[i][j].y + map.columns_nbr) * 20;
+	end_h.color = 0xff0000; // add correct usage
+	draw_line(start_h, end_h, window);
 }

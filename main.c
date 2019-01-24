@@ -33,9 +33,11 @@ int		fd_open_file_with_map()
 	int fd;
 
 	//	fd = open(argv[1], O_RDONLY);
-//	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/additional_files/test_maps/42.fdf", O_RDONLY);
-	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/elem-col.fdf", O_RDONLY);
-	if (fd < 0) {
+//	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/test_maps/42.fdf", O_RDONLY);
+	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/test_maps/elem-col.fdf", O_RDONLY);
+//	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/test_maps/basictest.fdf", O_RDONLY);
+	if (fd < 0)
+	{
 		ft_putstr("error\n");
 		return (0);
 	}
@@ -77,9 +79,11 @@ int		main(/*int argc, char **argv*/)
 	fd = fd_open_file_with_map();
 	map.lines_nbr = ft_check_lines_number(fd);
 	map.columns_nbr = ft_ft_check_columns_number(fd);
+
+//	printf("lines:   %d, columns   %d\n", map.lines_nbr, map.columns_nbr); // MAP SIZE test - OK
 	close(fd);
 
-	arr_of_coordinates = ft_create_map(map.lines_nbr, map.columns_nbr);
+	arr_of_coordinates = ft_create_map(map.lines_nbr + 1, map.columns_nbr + 1);
 	fd = fd_open_file_with_map();
 	if (!(ft_read_map(fd, arr_of_coordinates)))
 	{
@@ -91,6 +95,8 @@ int		main(/*int argc, char **argv*/)
 	window.win_ptr = mlx_new_window(window.mlx_ptr, LENGTH, WIDTH, "fdf");
 	draw_net(map, window, arr_of_coordinates);
 	mlx_loop(window.mlx_ptr);
+
+
 
 	/** test */
 //	t_vector start;
