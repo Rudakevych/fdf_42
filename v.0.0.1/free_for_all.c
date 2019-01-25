@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_3d_projection.c                               :+:      :+:    :+:   */
+/*   free_for_all.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrudakev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/24 15:28:57 by yrudakev          #+#    #+#             */
-/*   Updated: 2019/01/24 15:28:59 by yrudakev         ###   ########.fr       */
+/*   Created: 2019/01/22 11:23:02 by yrudakev          #+#    #+#             */
+/*   Updated: 2019/01/22 11:23:13 by yrudakev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_3d_map()
+void	ft_free_after_split(char **arr)
 {
+	int i;
 
+	i = 0;
+	while (arr[i] != NULL)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr[i]);
 }
