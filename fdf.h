@@ -30,12 +30,12 @@
 # define LENGTH 700
 # define WIDTH 500
 
-typedef struct		s_vector
-{
-	int 			x;
-	int 			y;
-	int 			color;
-}					t_vector;
+//typedef struct		s_vector
+//{
+//	int 			x;
+//	int 			y;
+//	int 			color;
+//}					t_vector;
 
 typedef struct		s_coordinates
 {
@@ -79,6 +79,5 @@ t_coordinates		**ft_create_map(int lines_nbr, int columns_nbr);
 void				ft_free_arr_of_coordinates(t_map_mlx *mlx);
 void				draw_line(t_coordinates *start, t_coordinates *end, t_map_mlx mlx);
 void				draw_net(t_map_mlx map);
-
 
 #endif
