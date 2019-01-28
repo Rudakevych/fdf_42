@@ -30,13 +30,6 @@
 # define LENGTH 700
 # define WIDTH 500
 
-//typedef struct		s_vector
-//{
-//	int 			x;
-//	int 			y;
-//	int 			color;
-//}					t_vector;
-
 typedef struct		s_coordinates
 {
 	int 			x;
