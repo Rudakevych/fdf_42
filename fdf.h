@@ -30,20 +30,27 @@
 # define LENGTH 700
 # define WIDTH 500
 
+typedef struct		s_vector
+{
+	int 			x;
+	int 			y;
+	int 			color;
+}					t_vector;
+
 typedef struct		s_coordinates
 {
 	int 			x;
 	int 			y;
 	int 			z;
-	char 			*color;
+	int 			color;
+	int 			x_new;
+	int 			y_new;
+	int 			z_new;
+	int 			color_new;
 } 					t_coordinates;
 
 typedef struct		s_map_mlx
 {
-	int 			old_x;
-	int 			old_y;
-	int 			new_x;
-	int 			new_y;
 	void			*mlx_ptr;
 	void			*win_ptr;
 //	void			*img_ptr;
@@ -53,13 +60,6 @@ typedef struct		s_map_mlx
 	int 			lines_nbr;
 	t_coordinates	**arr_of_coordinates;
 } 					t_map_mlx;
-
-typedef struct		s_vector
-{
-	int 			x;
-	int 			y;
-	int 			color;
-}					t_vector;
 
 typedef struct		s_dx_dy_sx_sy
 {
@@ -73,11 +73,12 @@ typedef struct		s_dx_dy_sx_sy
 int					get_next_line(const int fd, char **line);
 int					ft_check_lines_number(int fd);
 int					ft_ft_check_columns_number(int fd);
-int					ft_read_map(int fd, t_map_mlx *mlx);
+int					ft_read_map(int fd, t_map_mlx map_mlx);
 void				ft_free_after_split(char **arr);
+t_coordinates		**ft_create_map(int lines_nbr, int columns_nbr);
 void				ft_free_arr_of_coordinates(t_map_mlx *mlx);
-void				draw_line(t_vector start, t_vector end, t_map_mlx *mlx);
-//void				draw_net(t_map map, t_window window, t_coordinates	**arr_of_coordinates);
+void				draw_line(t_coordinates *start, t_coordinates *end, t_map_mlx mlx);
+void				draw_net(t_map_mlx map);
 
 
 #endif

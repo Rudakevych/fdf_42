@@ -66,12 +66,10 @@ int		fd_open_file_with_map()
 //	return (NULL);
 //}
 
-int		main(/*int argc, char **argv*/)
+int		main()
 {
 	int				fd;
-	t_coordinates	**arr_of_coordinates;
-	t_map			map;
-	t_window		window;
+	t_map_mlx		map;
 
 //	if (argc != 2) // ??????
 //		ft_putstr("Usage : ./fdf <filename> [ case_size z_size ]");
@@ -83,18 +81,18 @@ int		main(/*int argc, char **argv*/)
 	printf("lines:   %d, columns   %d\n", map.lines_nbr - 1, map.columns_nbr - 1); // MAP SIZE test - OK
 	close(fd);
 
-	arr_of_coordinates = ft_create_map(map.lines_nbr, map.columns_nbr);
+	map.arr_of_coordinates = ft_create_map(map.lines_nbr, map.columns_nbr);
 	fd = fd_open_file_with_map();
-	if (!(ft_read_map(fd, arr_of_coordinates)))
+	if (!(ft_read_map(fd, map)))
 	{
 		ft_putstr("error\n");
 		return (0);
 	}
-	window.mlx_ptr = mlx_init();
-	window.win_ptr = mlx_new_window(window.mlx_ptr, LENGTH, WIDTH, "fdf");
-	draw_net(map, window, arr_of_coordinates);
-	mlx_loop(window.mlx_ptr);
-	close(fd);
+	map.mlx_ptr = mlx_init();
+	map.win_ptr = mlx_new_window(map.mlx_ptr, LENGTH, WIDTH, "fdf");
+	draw_net(map);
+	mlx_loop(map.mlx_ptr);
+//	close(fd);
 	// add code for free arr_of_coordinates
 //	system("leaks -q main");
 	return 0;

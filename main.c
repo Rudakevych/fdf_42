@@ -21,9 +21,6 @@
 	man /usr/share/man/man3/mlx.1
 
  	man 3 math
-
- 	ft_putstr("Usage : ./fdf <filename> [ case_size z_size ]");
- 	system("leaks -q main");
  */
 
 /**
@@ -47,82 +44,59 @@ int		fd_open_file_with_map()
 	return (fd);
 }
 
-void	create_map(int fd, t_map_mlx *mlx)
-{
-	mlx->mlx_ptr = mlx_init();
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, LENGTH, WIDTH, "fdf");
-	mlx->lines_nbr = ft_check_lines_number(fd) + 1;
-	mlx->columns_nbr = ft_ft_check_columns_number(fd) + 1;
-//	printf("lines:   %d, columns   %d\n", mlx->lines_nbr - 1, mlx->columns_nbr - 1); // MAP SIZE test - OK
-
-/* 	// create img
-	if ((window->img_ptr = mlx_new_image(window->mlx_ptr, LENGTH, WIDTH)) == NULL)
-		return (NULL);
-	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->img_ptr, LENGTH, WIDTH);
-
-	// takes a standard RGB color parameter, and returns an unsigned int value
-	window.img_color_value = mlx_get_color_value (window.mlx_ptr, 0xFFFFFF);
-
-	//  returns information about the created image, allowing a user to modify it later
-	 //???????
-	window.img_data_addr = mlx_get_data_addr(window.img_ptr, window.img_color_value, 8, 0);
-	*/
-
-}
+//t_window	*init_new_window()
+//{
+//	t_window	*window;
+//
+//	// init and create new window
+//	window->mlx_ptr = mlx_init();
+//	window->win_ptr = mlx_new_window(window.mlx_ptr, LENGTH, WIDTH, "fdf");
+//
+//	// create img
+////	if ((window->img_ptr = mlx_new_image(window->mlx_ptr, LENGTH, WIDTH)) == NULL)
+////		return (NULL);
+////	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->img_ptr, LENGTH, WIDTH);
+//
+//	// takes a standard RGB color parameter, and returns an unsigned int value
+////	window.img_color_value = mlx_get_color_value (window.mlx_ptr, 0xFFFFFF);
+//
+//	//  returns information about the created image, allowing a user to modify it later
+//	/** ??????? */
+////	window.img_data_addr = mlx_get_data_addr(window.img_ptr, window.img_color_value, 8, 0);
+//	return (NULL);
+//}
 
 int		main()
 {
 	int				fd;
-	t_map_mlx		*mlx;
+	t_map_mlx		map;
 
-	mlx = (t_map_mlx *)malloc(sizeof(t_map_mlx));
+//	if (argc != 2) // ??????
+//		ft_putstr("Usage : ./fdf <filename> [ case_size z_size ]");
+//	window = NULL;
 	fd = fd_open_file_with_map();
-	create_map(fd, mlx);
+	map.lines_nbr = ft_check_lines_number(fd) + 1;
+	map.columns_nbr = ft_ft_check_columns_number(fd) + 1;
+
+	printf("lines:   %d, columns   %d\n", map.lines_nbr - 1, map.columns_nbr - 1); // MAP SIZE test - OK
+	close(fd);
+
+	map.arr_of_coordinates = ft_create_map(map.lines_nbr, map.columns_nbr);
+	fd = fd_open_file_with_map();
+	if (!(ft_read_map(fd, map)))
+	{
+		ft_putstr("error\n");
+		return (0);
+	}
+	map.mlx_ptr = mlx_init();
+	map.win_ptr = mlx_new_window(map.mlx_ptr, LENGTH, WIDTH, "fdf");
+	draw_net(map);
+	mlx_loop(map.mlx_ptr);
 //	close(fd);
-//	fd = fd_open_file_with_map();
-//	if (!(ft_read_map(fd, mlx)))
-//	{
-//		ft_putstr("error\n");
-//		return (0);
-//	}
-//
-//	close(fd);
-//	// add code for free arr_of_coordinates
-//	ft_free_arr_of_coordinates(mlx);
-
-
-
-	t_vector start;
-	t_vector end;
-	start.x = 20;
-	start.y = 20;
-	start.color = 0xFFFFFF;
-	end.x = 100;
-	end.y = 100;
-	end.color = 0xFFFFFF;
-	draw_line(start, end, mlx);
-
-	free(mlx);
+	// add code for free arr_of_coordinates
+//	system("leaks -q main");
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

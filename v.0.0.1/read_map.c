@@ -52,18 +52,18 @@ t_coordinates	**ft_create_map(int lines_nbr, int columns_nbr)
 	return (arr_of_coordinates);
 }
 
-void			ft_add_coordinates_to_arr(char **coordinates, int x, int y, t_coordinates **arr_of_coordinates)
+void			ft_add_coordinates_to_arr(char **coordinates, int x, int y, t_map_mlx map)
 {
 	while (coordinates[x])
 	{
-		arr_of_coordinates[x][y].x = x;
-		arr_of_coordinates[x][y].y = y;
-		arr_of_coordinates[x][y].z = ft_atoi(coordinates[x]);
+		map.arr_of_coordinates[x][y].x = x;
+		map.arr_of_coordinates[x][y].y = y;
+		map.arr_of_coordinates[x][y].z = ft_atoi(coordinates[x]);
 		x++;
 	}
 }
 
-int				ft_read_map(int fd, t_coordinates **arr_of_coordinates)
+int				ft_read_map(int fd, t_map_mlx map_mlx)
 {
 	char	*line;
 	char	**coordinates;
@@ -75,7 +75,7 @@ int				ft_read_map(int fd, t_coordinates **arr_of_coordinates)
 	{
 		x = 0;
 		coordinates = ft_strsplit(line, ' ');
-		ft_add_coordinates_to_arr(coordinates, x, y, arr_of_coordinates);
+		ft_add_coordinates_to_arr(coordinates, x, y, map_mlx);
 		free(line);
 		ft_free_after_split(coordinates);
 		y++;
