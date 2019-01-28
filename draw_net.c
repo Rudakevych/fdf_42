@@ -52,8 +52,8 @@ void	draw_net(t_map_mlx map)
 		j = 0;
 		while (j < map.lines_nbr)
 		{
-//			if ((i == map.columns_nbr - 1) && (j == map.columns_nbr - 1))
-//				break ;
+			if ((i == map.columns_nbr - 1) && (j == map.columns_nbr - 1))
+				break ;
 			if (j != map.lines_nbr - 2)
 			{
 				start_h.x = map.arr_of_coordinates[i][j].x * 20;

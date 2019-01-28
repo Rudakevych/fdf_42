@@ -90,5 +90,3 @@ void	draw_line(t_coordinates *start, t_coordinates *end, t_map_mlx mlx)
 	else
 		draw_line_up(ds_points, start, mlx);
 }
-
-
