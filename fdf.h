@@ -72,5 +72,6 @@ t_coordinates		**ft_create_map(int lines_nbr, int columns_nbr);
 void				ft_free_arr_of_coordinates(t_map_mlx *mlx);
 void				draw_line(t_coordinates *start, t_coordinates *end, t_map_mlx mlx);
 void				draw_net(t_map_mlx map);
+void				draw_net_3d(t_map_mlx map);
 
 #endif

@@ -90,7 +90,8 @@ int		main()
 	}
 	map.mlx_ptr = mlx_init();
 	map.win_ptr = mlx_new_window(map.mlx_ptr, LENGTH, WIDTH, "fdf");
-	draw_net(map);
+//	draw_net(map);
+	draw_net_3d(map);
 
 	mlx_loop(map.mlx_ptr);
 //	close(fd);
