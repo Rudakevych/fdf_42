@@ -40,7 +40,7 @@ void	draw_net(t_map_mlx map)
 				end_h.y = (map.arr_of_coordinates[i][j].y + 1) * 20;
 				end_h.color = 0xFFFFFF; // add correct usage
 				draw_line(&start_h, &end_h, map);
-//				draw_line(&map.arr_of_coordinates[i][j], &map.arr_of_coordinates[i][j + 1], map);
+//				ft_draw_line(&map.arr_of_coordinates[i][j], &map.arr_of_coordinates[i][j + 1], map);
 			}
 			if (i != map.columns_nbr - 2)
 			{
@@ -51,7 +51,7 @@ void	draw_net(t_map_mlx map)
 				end_h.y = map.arr_of_coordinates[i][j].y * 20;
 				end_h.color = 0xFFFFFF; // add correct usage
 				draw_line(&start_h, &end_h, map);
-//				draw_line(&map.arr_of_coordinates[i][j], &map.arr_of_coordinates[i + 1][j], map);
+//				ft_draw_line(&map.arr_of_coordinates[i][j], &map.arr_of_coordinates[i + 1][j], map);
 			}
 			j++;
 		}
@@ -108,7 +108,7 @@ void	draw_net_3d(t_map_mlx map)
                 end_h.color = 0xFFFFFF; // add correct usage
                 draw_line(&start_h, &end_h, map);
 
-//				draw_line(&map.arr_of_coordinates[i][j], &map.arr_of_coordinates[i][j + 1], map);
+//				ft_draw_line(&map.arr_of_coordinates[i][j], &map.arr_of_coordinates[i][j + 1], map);
             }
             if (i != map.columns_nbr - 2)
             {
@@ -121,7 +121,7 @@ void	draw_net_3d(t_map_mlx map)
                 end_h.color = 0xFFFFFF; // add correct usage
                 draw_line(&start_h, &end_h, map);
 
-//				draw_line(&map.arr_of_coordinates[i][j], &map.arr_of_coordinates[i + 1][j], map);
+//				ft_draw_line(&map.arr_of_coordinates[i][j], &map.arr_of_coordinates[i + 1][j], map);
             }
 //			printf("%d      X: %d    Y:%d \n", num++, arr_of_coordinates[i][j].x, arr_of_coordinates[i][j].y);
 //			printf("%d: %d -> %d: %d\n", start_h.x, start_h.y, end_h.x, end_h.y);

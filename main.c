@@ -23,80 +23,82 @@
  	man 3 math
  */
 
-/**
- * Reminder:
- *  Validate map!!!!
- */
 
-int		fd_open_file_with_map()
-{
-	int fd;
-
-	//	fd = open(argv[1], O_RDONLY);
-//	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/test_maps/42.fdf", O_RDONLY);
-	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/test_maps/elem-col.fdf", O_RDONLY);
-//	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/test_maps/basictest.fdf", O_RDONLY);
-	if (fd < 0)
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	return (fd);
-}
-
-//t_window	*init_new_window()
+//int		fd_open_file_with_map()
 //{
-//	t_window	*window;
+//	int fd;
 //
-//	// init and create new window
-//	window->mlx_ptr = mlx_init();
-//	window->win_ptr = mlx_new_window(window.mlx_ptr, LENGTH, WIDTH, "fdf");
-//
-//	// create img
-////	if ((window->img_ptr = mlx_new_image(window->mlx_ptr, LENGTH, WIDTH)) == NULL)
-////		return (NULL);
-////	mlx_put_image_to_window(window->mlx_ptr, window->win_ptr, window->img_ptr, LENGTH, WIDTH);
-//
-//	// takes a standard RGB color parameter, and returns an unsigned int value
-////	window.img_color_value = mlx_get_color_value (window.mlx_ptr, 0xFFFFFF);
-//
-//	//  returns information about the created image, allowing a user to modify it later
-//	/** ??????? */
-////	window.img_data_addr = mlx_get_data_addr(window.img_ptr, window.img_color_value, 8, 0);
-//	return (NULL);
+//	//	fd = open(argv[1], O_RDONLY);
+//	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/test_maps/42.fdf", O_RDONLY);
+////	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/test_maps/elem-col.fdf", O_RDONLY);
+////	fd = open("/Users/yrudakev/CLionProjects/FdF_worked_version/test_maps/basictest.fdf", O_RDONLY);
+//	if (fd < 0)
+//	{
+//		ft_putstr("error\n");
+//		return (0);
+//	}
+//	return (fd);
 //}
 
-int		main()
+
+void	ft_display_controls()
+{
+	ft_putstr(" \n____________________________\nCONTROLS:\nTranslation:\n	Y: Key: UP, DOWN\n	X: Key: LEFT, RIGHT\n\nRotation:\n	X: Keypad: 1, 4\n	Y: Keypad: 2, 5\n	Z: Keypad: 3, 6\n\\nZoom:\n	IN: Keypad: +\n	OUT: Keypad: -\n____________________________\n");
+}
+
+int		main(int argc, char **argv)
 {
 	int				fd;
-	t_map_mlx		map;
+//	t_map_mlx		map;
+	t_map			*map;
+	t_env			*env;
 
-//	if (argc != 2) // ??????
-//		ft_putstr("Usage : ./fdf <filename> [ case_size z_size ]");
-//	window = NULL;
-	fd = fd_open_file_with_map();
-	map.lines_nbr = ft_check_lines_number(fd) + 1;
-	map.columns_nbr = ft_ft_check_columns_number(fd) + 1;
-
-	printf("lines:   %d, columns   %d\n", map.lines_nbr - 1, map.columns_nbr - 1); // MAP SIZE test - OK
-	close(fd);
-
-	map.arr_of_coordinates = ft_create_map(map.lines_nbr, map.columns_nbr);
-	fd = fd_open_file_with_map();
-	if (!(ft_read_map(fd, map)))
+	fd = 0;
+	if (argc == 2)
 	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	map.mlx_ptr = mlx_init();
-	map.win_ptr = mlx_new_window(map.mlx_ptr, LENGTH, WIDTH, "fdf");
-//	draw_net(map);
-	draw_net_3d(map);
+		if (!(env = (t_env *)malloc(sizeof(t_env))))
+			ft_error_malloc();
+//		fd = fd_open_file_with_map(); // fd = 0;
+		map = ft_read_map(fd, argv);
+		if (map->lenght == 0 || map->lines[0]->len == 0)
+			ft_error_map();
+		env->map = map;
+		ft_center_of_map(env);
+		ft_display_controls();
+		ft_init_new_window(env, WINDOW_WIDTH, WINDOW_HEIGHT, "fdf");
+		ft_map_adaptation(env);
+		mlx_expose_hook(env->win, expose_hook, env);
+		mlx_hook(env->win, 2, 3, key_hook, env);
+		mlx_loop(env->mlx);
 
-	mlx_loop(map.mlx_ptr);
-//	close(fd);
-	// add code for free arr_of_coordinates
-//	system("leaks -q main");
+
+
+
+
+//		map.lines_nbr = ft_check_lines_number(fd) + 1;
+//		map.columns_nbr = ft_ft_check_columns_number(fd) + 1;
+//
+//		printf("lines:   %d, columns   %d\n", map.lines_nbr - 1, map.columns_nbr - 1); // MAP SIZE test - OK
+//		close(fd);
+//
+//		map.arr_of_coordinates = ft_create_map(map.lines_nbr, map.columns_nbr);
+//		fd = fd_open_file_with_map();
+//		if (!(ft_read_map(fd, map))) {
+//			ft_putstr("error\n");
+//			return (0);
+//		}
+//		map.mlx_ptr = mlx_init();
+//		map.win_ptr = mlx_new_window(map.mlx_ptr, LENGTH, WIDTH, "fdf");
+//		//	draw_net(map);
+//		draw_net_3d(map);
+//
+//		mlx_loop(map.mlx_ptr);
+//		//	close(fd);
+//		// add code for free arr_of_coordinates
+//		//	system("leaks -q main");
+	}
+	else
+		ft_putstr("ERROR: Usage -> ./fdf <filename>");
 	return 0;
 }
 
@@ -127,7 +129,7 @@ int		main()
 //	end.x = 100;
 //	end.y = 100;
 //	end.color = 0xFFFFFF;
-//	draw_line(start, end, window);
+//	ft_draw_line(start, end, window);
 
 
 
@@ -243,7 +245,7 @@ int		main()
 //	end.color = 0xFFFFFF;
 //	window.mlx_ptr = mlx_init();
 //	window.win_ptr = mlx_new_window(window.mlx_ptr, 500, 500, "fdf window");
-//	draw_line(start, end, window);
+//	ft_draw_line(start, end, window);
 //	mlx_loop(window.mlx_ptr);
 //
 //

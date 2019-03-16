@@ -23,8 +23,11 @@ HEAD = fdf.h
 SRC =	main.c \
         read_map.c \
         free_for_all.c \
-        draw_line.c \
+        ft_draw_line.c \
         get_next_line.c \
+        errors_all.c \
+        one_more_file.c \
+        draw_window.c \
         draw_net.c
 
 OBJ = $(patsubst %.c,%.o,$(addprefix $(PATH_SRC), $(SRC)))

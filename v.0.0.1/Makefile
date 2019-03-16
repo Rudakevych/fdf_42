@@ -23,7 +23,7 @@ HEAD = fdf.h
 SRC =	main.c \
         read_map.c \
         free_for_all.c \
-        draw_line.c \
+        ft_draw_line.c \
         get_next_line.c \
         draw_net.c
 
