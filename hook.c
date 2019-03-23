@@ -46,7 +46,7 @@ static	void	key_hook_rotation(int keycode, t_env *e)
 static	void	key_hook_translation(int keycode, t_env *e)
 {
 	if (keycode == KEY_UP)
-		ft_cal_translat(e, 0, MOVE_UP, 0);
+//		ft_cal_translat(e, 0, MOVE_UP, 0);
 	else if (keycode == KEY_DOWN)
 		ft_cal_translat(e, 0, MOVE_DOWN, 0);
 	else if (keycode == KEY_LEFT)
